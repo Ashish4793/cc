@@ -26,20 +26,34 @@ app.get("/" , function(req,res){
     console.log(currentDate);
 });
 
-cron.schedule('*/10 * * * * *', () => {
+function myFunction(){
     const newMy = new My({
-        name : "AA"
+        name : "aa"
     });
     newMy.save(function(err){
         if (!err) {
-            console.log("Inserted");
+            console.log("Inserted")
+        } else {
+            console.log(err);
         }
-    })
-});
+    });
+}
+
+// cron.schedule('*/10 * * * * *', () => {
+//     const newMy = new My({
+//         name : "AA"
+//     });
+//     newMy.save(function(err){
+//         if (!err) {
+//             ;
+//         }
+//     })
+// });
 
 connectDB().then(() => {
     console.log("eafas CONNECTED SUCCESFULLY");
     app.listen(4000, () => {
         console.log("easf Server STARTED");
+        setInterval(myFunction , 10000);
     })
 });
